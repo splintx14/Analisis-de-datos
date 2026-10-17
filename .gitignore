@@ -1,0 +1,21 @@
+# Dependencias
+node_modules/
+
+# Secretos: NUNCA subir estos archivos
+.env
+.env.local
+.env.*.local
+
+# Next.js
+.next/
+out/
+
+# Sistema y editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs y archivos subidos
+*.log
+uploads/
