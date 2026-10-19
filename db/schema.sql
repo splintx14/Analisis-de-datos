@@ -88,6 +88,7 @@ CREATE TABLE imports (
   error_rows      integer NOT NULL DEFAULT 0,
   column_mapping  jsonb NOT NULL DEFAULT '{}',      -- columna del Excel -> campo
   error_report    jsonb NOT NULL DEFAULT '[]',      -- filas inválidas y motivo
+  raw             jsonb,                            -- archivo pendiente de confirmar
   created_at      timestamptz NOT NULL DEFAULT now(),
   completed_at    timestamptz,
   reverted_at     timestamptz
@@ -134,3 +135,19 @@ CREATE TABLE audit_log (
   created_at    timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX audit_log_workspace_idx ON audit_log (workspace_id, created_at DESC);
+
+-- ---------- Formulario de contacto ----------
+
+CREATE TABLE IF NOT EXISTS contact_messages (
+  id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name        text NOT NULL,
+  email       citext NOT NULL,
+  subject     text NOT NULL,
+  message     text NOT NULL,
+  ip          text,
+  read_at     timestamptz,
+  created_at  timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS contact_messages_ip_idx ON contact_messages (ip, created_at DESC);
+CREATE INDEX IF NOT EXISTS contact_messages_email_idx ON contact_messages (email, created_at DESC);

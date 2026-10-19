@@ -1,0 +1,9 @@
+.settings-card { max-width: 560px; }
+.settings-form select, .settings-form input[type="number"] {
+  font: inherit; padding: 12px 14px; color: var(--ink);
+  border: 1px solid rgba(16, 40, 58, 0.14); border-radius: 12px; background: rgba(255, 255, 255, 0.85);
+}
+.form-saved {
+  margin: 0; padding: 10px 12px; border-radius: 12px;
+  background: rgba(143, 233, 207, 0.45); color: var(--teal-deep); font-size: 0.9rem; font-weight: 600;
+}

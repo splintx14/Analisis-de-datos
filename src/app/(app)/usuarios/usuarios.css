@@ -1,0 +1,43 @@
+.invite { display: grid; gap: 14px; }
+.invite-form { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end; }
+.invite-form label {
+  display: grid; gap: 6px; flex: 1 1 200px;
+  font-family: var(--font-mono); font-size: 0.66rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft);
+}
+.invite-form input, .invite-form select, .role-form select {
+  font: inherit; font-size: 0.9rem; letter-spacing: 0; text-transform: none;
+  padding: 10px 12px; color: var(--ink);
+  border: 1px solid rgba(16, 40, 58, 0.14); border-radius: 12px; background: rgba(255, 255, 255, 0.85);
+}
+.invite-link {
+  padding: 14px 16px; border-radius: 14px;
+  background: rgba(143, 233, 207, 0.3); border: 1px solid rgba(15, 111, 104, 0.3);
+}
+.invite-link p { margin: 0 0 10px; font-size: 0.9rem; }
+.invite-link-row { display: flex; gap: 10px; }
+.invite-link-row input {
+  flex: 1; min-width: 0; padding: 10px 12px; font: inherit; font-size: 0.85rem; color: var(--ink);
+  border: 1px solid rgba(16, 40, 58, 0.14); border-radius: 12px; background: #fff;
+}
+
+.role-form { display: flex; gap: 8px; align-items: center; }
+.role-form select { padding: 6px 10px; font-size: 0.85rem; }
+.btn-xs { padding: 6px 12px; font-size: 0.8rem; border-radius: 10px; }
+.you { margin-left: 8px; padding: 1px 8px; border-radius: 999px; font-size: 0.7rem; font-weight: 700; background: rgba(91, 127, 214, 0.18); color: #3a56a8; }
+
+.confirm { position: relative; }
+.confirm summary {
+  list-style: none; cursor: pointer; font-size: 0.85rem; font-weight: 600; color: var(--danger);
+}
+.confirm summary::-webkit-details-marker { display: none; }
+.confirm summary:hover { text-decoration: underline; }
+.confirm-panel {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 5; width: 260px; padding: 14px;
+  display: grid; gap: 10px; text-align: left;
+  background: rgba(255, 255, 255, 0.97); border: 1px solid var(--glass-line);
+  border-radius: 14px; box-shadow: var(--shadow-glass); font-size: 0.85rem;
+}
+.confirm-panel p { margin: 0; color: var(--ink-soft); }
+.btn-danger { color: #fff; background: var(--danger); border-color: transparent; }
+.actions-cell { text-align: right; white-space: nowrap; }

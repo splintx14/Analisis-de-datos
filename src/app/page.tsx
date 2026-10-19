@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import Brand from "@/components/Brand";
 import Network from "@/components/Network";
 import PreviewDashboard from "@/components/PreviewDashboard";
+import SiteFooter from "@/components/SiteFooter";
+import SiteHeader from "@/components/SiteHeader";
 import { getSession } from "@/lib/auth";
 
 const POINTS = [
@@ -22,17 +22,10 @@ const POINTS = [
 
 export default async function Home() {
   const session = await getSession();
-  if (session) redirect("/resumen");
 
   return (
     <>
-      <header className="topbar">
-        <Brand />
-        <nav className="topbar-actions">
-          <Link href="/login" className="link-quiet">Iniciar sesión</Link>
-          <Link href="/registro" className="btn btn-outline btn-sm">Crear cuenta</Link>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <main>
         <div className="hero">
@@ -46,8 +39,14 @@ export default async function Home() {
                 rendimiento de tu negocio en un espacio seguro y compartido.
               </p>
               <div className="hero-actions">
-                <Link href="/registro" className="btn btn-dark">Comenzar ahora</Link>
-                <Link href="/login" className="btn btn-light">Ya tengo una cuenta</Link>
+                {session ? (
+                  <Link href="/resumen" className="btn btn-dark">Ir a mi espacio</Link>
+                ) : (
+                  <>
+                    <Link href="/registro" className="btn btn-dark">Comenzar ahora</Link>
+                    <Link href="/login" className="btn btn-light">Ya tengo una cuenta</Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -55,15 +54,21 @@ export default async function Home() {
           <PreviewDashboard />
         </div>
 
-        <ul className="points">
-          {POINTS.map((p) => (
-            <li key={p.title}>
-              <h3>{p.title}</h3>
-              <p>{p.text}</p>
-            </li>
-          ))}
-        </ul>
+        <section id="funciones" className="features">
+          <p className="eyebrow">Funciones</p>
+          <h2>Todo lo que necesitas para decidir mejor</h2>
+          <ul className="points">
+            {POINTS.map((p) => (
+              <li key={p.title}>
+                <h3>{p.title}</h3>
+                <p>{p.text}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
       </main>
+
+      <SiteFooter />
     </>
   );
 }
