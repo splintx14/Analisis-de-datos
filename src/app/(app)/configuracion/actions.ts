@@ -5,6 +5,7 @@ import { z } from "zod";
 import { CURRENCY_CODES } from "@/lib/currencies";
 import { pool } from "@/lib/db";
 import { requirePermission } from "@/lib/guard";
+import { companyKey } from "@/lib/signup";
 
 export type SettingsState = { ok?: boolean; error?: string } | undefined;
 
@@ -32,12 +33,30 @@ export async function updateSettings(
   }
   const { name, currency, rangeDays, refreshMinutes } = parsed.data;
 
-  await pool.query(
-    `UPDATE workspaces
-        SET name = $2, currency = $3, default_range_days = $4, auto_refresh_minutes = $5
-      WHERE id = $1`,
-    [session.workspaceId, name, currency, rangeDays, refreshMinutes],
+  const key = companyKey(name);
+  if (key.length < 2) return { error: "Escribe un nombre de empresa válido." };
+
+  const clash = await pool.query(
+    "SELECT 1 FROM workspaces WHERE name_key = $1 AND id <> $2",
+    [key, session.workspaceId],
   );
+  if (clash.rowCount && clash.rowCount > 0) {
+    return { error: "Ya existe un espacio con el nombre de esa empresa." };
+  }
+
+  try {
+    await pool.query(
+      `UPDATE workspaces
+          SET name = $2, name_key = $3, currency = $4, default_range_days = $5, auto_refresh_minutes = $6
+        WHERE id = $1`,
+      [session.workspaceId, name, key, currency, rangeDays, refreshMinutes],
+    );
+  } catch (err) {
+    if ((err as { code?: string }).code === "23505") {
+      return { error: "Ya existe un espacio con el nombre de esa empresa." };
+    }
+    throw err;
+  }
   await pool.query(
     "INSERT INTO audit_log (workspace_id, user_id, action) VALUES ($1, $2, 'settings.updated')",
     [session.workspaceId, session.userId],

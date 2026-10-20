@@ -25,6 +25,11 @@ CREATE TABLE users (
   email                 citext NOT NULL UNIQUE,
   name                  text NOT NULL,
   password_hash         text NOT NULL,              -- argon2, nunca la clave en texto
+  first_name            text,
+  last_name             text,
+  phone                 text,
+  country               char(2),
+  job_title             text,
   email_verified_at     timestamptz,
   failed_login_attempts integer NOT NULL DEFAULT 0,
   locked_until          timestamptz,                -- bloqueo temporal por intentos fallidos
@@ -48,6 +53,9 @@ CREATE TABLE workspaces (
   id                    uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   name                  text NOT NULL,
   currency              char(3) NOT NULL DEFAULT 'USD',
+  name_key              text,                       -- nombre normalizado, para evitar empresas repetidas
+  tax_id                text,
+  tax_id_key            text,
   default_range_days    integer NOT NULL DEFAULT 90 CHECK (default_range_days > 0),
   auto_refresh_minutes  integer NOT NULL DEFAULT 5 CHECK (auto_refresh_minutes >= 0),
   created_by            uuid REFERENCES users(id) ON DELETE SET NULL,
@@ -151,3 +159,9 @@ CREATE TABLE IF NOT EXISTS contact_messages (
 
 CREATE INDEX IF NOT EXISTS contact_messages_ip_idx ON contact_messages (ip, created_at DESC);
 CREATE INDEX IF NOT EXISTS contact_messages_email_idx ON contact_messages (email, created_at DESC);
+
+-- ---------- Empresas únicas ----------
+CREATE UNIQUE INDEX IF NOT EXISTS workspaces_name_key_idx
+  ON workspaces (name_key) WHERE name_key IS NOT NULL;
+CREATE UNIQUE INDEX IF NOT EXISTS workspaces_tax_id_key_idx
+  ON workspaces (tax_id_key) WHERE tax_id_key IS NOT NULL;

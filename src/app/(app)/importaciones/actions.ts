@@ -37,7 +37,7 @@ export async function uploadImport(_prev: UploadState, formData: FormData): Prom
     return { error: "Elige un archivo para subir." };
   }
   if (file.size > MAX_BYTES) {
-    return { error: "El archivo supera los 5 MB." };
+    return { error: "El archivo supera los 4 MB." };
   }
 
   const filename = file.name.slice(0, 200);

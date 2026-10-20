@@ -1,0 +1,21 @@
+.auth-card.wide { max-width: 760px; }
+.form-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .form-grid { grid-template-columns: 1fr 1fr; } }
+.form-grid .full { grid-column: 1 / -1; }
+.form fieldset { margin: 0; padding: 0; border: 0; display: grid; gap: 16px; }
+.form legend {
+  margin-bottom: 14px; padding: 0; width: 100%;
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-soft);
+  border-bottom: 1px solid rgba(16, 40, 58, 0.1); padding-bottom: 8px;
+}
+.form select {
+  font: inherit; padding: 12px 14px; color: var(--ink);
+  border: 1px solid rgba(16, 40, 58, 0.14); border-radius: 12px; background: rgba(255, 255, 255, 0.85);
+}
+.form select:focus { outline: 2px solid var(--teal); outline-offset: 0; border-color: transparent; }
+.form-errors {
+  margin: 0; padding: 12px 14px 12px 32px; border-radius: 12px; display: grid; gap: 4px;
+  background: rgba(251, 234, 230, 0.95); color: var(--danger); font-size: 0.9rem; font-weight: 600;
+}
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }

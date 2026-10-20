@@ -7,7 +7,10 @@ export type Permission =
   | "imports.view"
   | "imports.create"
   | "users.manage"
-  | "settings.manage";
+  | "settings.manage"
+  | "reports.view"
+  | "reports.manage"
+  | "data.export";
 
 const FULL: Permission[] = [
   "dashboard.view",
@@ -17,6 +20,9 @@ const FULL: Permission[] = [
   "imports.create",
   "users.manage",
   "settings.manage",
+  "reports.view",
+  "reports.manage",
+  "data.export",
 ];
 
 // Matriz de permisos por rol. Es la única fuente de verdad:
@@ -24,16 +30,25 @@ const FULL: Permission[] = [
 const MATRIX: Record<Role, Permission[]> = {
   owner: FULL,
   admin: FULL,
-  analyst: ["dashboard.view", "records.view", "imports.view", "imports.create"],
+  analyst: [
+    "dashboard.view",
+    "records.view",
+    "imports.view",
+    "imports.create",
+    "reports.view",
+    "reports.manage",
+    "data.export",
+  ],
   data_editor: [
     "dashboard.view",
     "records.view",
     "records.edit",
     "imports.view",
     "imports.create",
+    "reports.view",
   ],
-  viewer: ["dashboard.view", "records.view"],
-  guest: [],
+  viewer: ["dashboard.view", "records.view", "reports.view"],
+  guest: ["reports.view"],
 };
 
 export const PERMISSION_LABELS: Record<Permission, string> = {
@@ -44,6 +59,9 @@ export const PERMISSION_LABELS: Record<Permission, string> = {
   "imports.create": "Importar datos",
   "users.manage": "Gestionar usuarios y roles",
   "settings.manage": "Cambiar la configuración del espacio",
+  "reports.view": "Ver reportes guardados (los invitados solo ven los compartidos)",
+  "reports.manage": "Crear, compartir y eliminar reportes",
+  "data.export": "Exportar datos a Excel y CSV",
 };
 
 export const can = (role: Role, permission: Permission) =>
@@ -58,7 +76,8 @@ export type IconName =
   | "upload"
   | "users"
   | "user"
-  | "settings";
+  | "settings"
+  | "report";
 
 export interface NavItem {
   href: string;
@@ -77,6 +96,7 @@ const NAV: NavGroup[] = [
     label: "Analítica",
     items: [
       { href: "/resumen", label: "Resumen", icon: "dashboard", permission: "dashboard.view" },
+      { href: "/reportes", label: "Reportes", icon: "report", permission: "reports.view" },
     ],
   },
   {

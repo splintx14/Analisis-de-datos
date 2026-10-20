@@ -33,6 +33,12 @@ const ICONS: Record<IconName, React.ReactNode> = {
       <path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.9.6 3.2 2.3 3.5 5.2" />
     </>
   ),
+  report: (
+    <>
+      <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+      <path d="M14 3v5h5M9 13h6M9 17h4" />
+    </>
+  ),
   user: (
     <>
       <circle cx="12" cy="8" r="4" />

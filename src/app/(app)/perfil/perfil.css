@@ -1,0 +1,8 @@
+.form-saved {
+  margin: 0; padding: 10px 12px; border-radius: 12px;
+  background: rgba(143, 233, 207, 0.45); color: var(--teal-deep); font-size: 0.9rem; font-weight: 600;
+}
+.card .form { max-width: 420px; }
+.session-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.session-head h2 { margin-bottom: 14px; }
+.this-device { padding: 2px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; background: rgba(143, 233, 207, 0.5); color: var(--teal-deep); }

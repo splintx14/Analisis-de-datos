@@ -26,7 +26,7 @@ export const MAPPING_FIELDS: { key: MappingKey; label: string; required: boolean
   { key: "referencia", label: "Referencia u orden", required: false },
 ];
 
-export const MAX_BYTES = 5 * 1024 * 1024;
+export const MAX_BYTES = 4 * 1024 * 1024;
 export const MAX_ROWS = 20000;
 export const MAX_COLS = 50;
 

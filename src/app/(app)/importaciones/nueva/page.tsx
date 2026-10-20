@@ -30,7 +30,7 @@ export default async function NuevaImportacionPage() {
         <p className="card-kicker">Antes de subir</p>
         <h2>Cómo preparar el archivo</h2>
         <ul className="hint-list">
-          <li>Formatos: <strong>.xlsx</strong> (se lee la primera hoja) o <strong>.csv</strong>. Máximo 5 MB y 20.000 filas.</li>
+          <li>Formatos: <strong>.xlsx</strong> (se lee la primera hoja) o <strong>.csv</strong>. Máximo 4 MB y 20.000 filas.</li>
           <li>La primera fila debe ser el encabezado con el nombre de cada columna.</li>
           <li>Obligatorias: una columna de <strong>fecha</strong> y una de <strong>monto</strong>. Opcionales: categoría, región y referencia u orden.</li>
           <li>Las fechas pueden venir como 2026-03-15 o 15/03/2026 (día primero). Los montos aceptan formatos como 1234.56, 1.234,56 o $ 1,234.56.</li>
